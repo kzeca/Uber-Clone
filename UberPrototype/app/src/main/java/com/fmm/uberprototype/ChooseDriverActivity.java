@@ -24,6 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
@@ -115,7 +116,7 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Begin));
-        
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_json));
         Drawable PinDrawable = getDrawable(R.drawable.pin);
         Bitmap PinIconBitmap = ((BitmapDrawable) PinDrawable).getBitmap();
         Bitmap PinBitmapIcon = Bitmap.createScaledBitmap(PinIconBitmap, 100, 100, false);
