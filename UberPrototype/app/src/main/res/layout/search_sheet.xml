@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ADADAD"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/search_sheet_bt_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#00F7F7F7"
+        android:src="@drawable/ic_arrow_back_black_24dp" />
+
+    <EditText
+        android:id="@+id/search_sheet_et_begin"
+        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_sheet_bt_back"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="#E2E2E2"
+        android:hint="Insira o local de partida"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/search_sheet_et_end"
+        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_sheet_et_begin"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:background="#E2E2E2"
+        android:hint="Para onde?"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/search_sheet_bt_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_sheet_et_end"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="#000000"
+        android:text="Confirmar localização"
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/search_sheet_bt_mark_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginRight="14dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/ic_edit_location_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/search_sheet_bt_mark_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginRight="14dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/ic_edit_location_black_24dp" />
+
+</RelativeLayout>

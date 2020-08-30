@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <ImageView
+        android:id="@+id/layout_drivers_list_img_uber"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="15dp"
+        android:layout_weight="1"
+        android:src="@drawable/kzeca"/>
+
+    <TextView
+        android:id="@+id/layout_drivers_list_tv_driver"
+        android:layout_width="190dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:text="Uribe Beribe"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/layout_drivers_list_tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="R$1000,00"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+</LinearLayout>
