@@ -75,28 +75,31 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                btnStart.setEnabled(true);
                 driver = position;
-                if(driver == 0) {
-                    Toast.makeText(getApplicationContext(), " Você escolheu o Zequinha Gameplays!", Toast.LENGTH_SHORT).show();
-                    Drawable kzecaDrawable = getDrawable(R.drawable.kzeca);
-                    Bitmap kzecaIconBitmap = ((BitmapDrawable)kzecaDrawable).getBitmap();
-                    Bitmap kzecaBitmapIcon = Bitmap.createScaledBitmap(kzecaIconBitmap, 100, 100, false);
-                    carBitmapIcon = kzecaBitmapIcon;
-                }
-                if(driver == 1) {
-                    Toast.makeText(getApplicationContext(), "Você escolheu o Arlenha!", Toast.LENGTH_SHORT).show();
-                    Drawable arleyDrawable = getDrawable(R.drawable.arley);
-                    Bitmap arleyIconBitmap = ((BitmapDrawable)arleyDrawable).getBitmap();
-                    Bitmap arleyBitmapIcon = Bitmap.createScaledBitmap(arleyIconBitmap, 100, 100, false);
-                    carBitmapIcon =arleyBitmapIcon;
-                    
-                }
-                if(driver == 2){ 
-                    Toast.makeText(getApplicationContext(), "Você escolheu o Mestre Klinsman!", Toast.LENGTH_SHORT).show();
-                    Drawable klinsmanDrawable = getDrawable(R.drawable.klinsman);
-                    Bitmap klinsmanIconBitmap = ((BitmapDrawable)klinsmanDrawable).getBitmap();
-                    Bitmap klinsmanBitmapIcon = Bitmap.createScaledBitmap(klinsmanIconBitmap, 100, 100, false);
-                    carBitmapIcon = klinsmanBitmapIcon;
+                switch (driver){
+                    case 0:
+                        Toast.makeText(getApplicationContext(), " Você escolheu o Zequinha Gameplays!", Toast.LENGTH_SHORT).show();
+                        Drawable kzecaDrawable = getDrawable(R.drawable.kzeca);
+                        Bitmap kzecaIconBitmap = ((BitmapDrawable)kzecaDrawable).getBitmap();
+                        Bitmap kzecaBitmapIcon = Bitmap.createScaledBitmap(kzecaIconBitmap, 100, 100, false);
+                        carBitmapIcon = kzecaBitmapIcon;
+                        break;
+
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "Você escolheu o Arlenha!", Toast.LENGTH_SHORT).show();
+                        Drawable arleyDrawable = getDrawable(R.drawable.arley);
+                        Bitmap arleyIconBitmap = ((BitmapDrawable)arleyDrawable).getBitmap();
+                        Bitmap arleyBitmapIcon = Bitmap.createScaledBitmap(arleyIconBitmap, 100, 100, false);
+                        carBitmapIcon = arleyBitmapIcon;
+                        break;
+
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "Você escolheu o Mestre Klinsman!", Toast.LENGTH_SHORT).show();
+                        Drawable klinsmanDrawable = getDrawable(R.drawable.klinsman);
+                        Bitmap klinsmanIconBitmap = ((BitmapDrawable)klinsmanDrawable).getBitmap();
+                        Bitmap klinsmanBitmapIcon = Bitmap.createScaledBitmap(klinsmanIconBitmap, 100, 100, false);
+                        carBitmapIcon = klinsmanBitmapIcon;
                 }
             }
         });
@@ -105,6 +108,7 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
 
     private void setThings() {
         btnStart = findViewById(R.id.choose_driver_bt_confirm);
+        btnStart.setEnabled(false);
         Begin = getIntent().getExtras().getParcelable("PosBegin");
         End = getIntent().getExtras().getParcelable("PosEnd");
         linearLayout = findViewById(R.id.choose_driver_layout_drivers);
@@ -115,7 +119,10 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Begin));
+        mMap.setMyLocationEnabled(true);
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition
+                (new CameraPosition.Builder().target(Begin)
+                        .zoom(15).build()));
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_json));
         Drawable PinDrawable = getDrawable(R.drawable.pin);
         Bitmap PinIconBitmap = ((BitmapDrawable) PinDrawable).getBitmap();
@@ -139,9 +146,6 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
             public void onClick(View v) {
                 if(driver == 0 || driver == 1 || driver == 2){
                     linearLayout.setVisibility(View.GONE);
-                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition
-                            (new CameraPosition.Builder().target(Begin)
-                                    .zoom(25).build()));
                     Route();
                 }else{
                     Toast.makeText(getApplicationContext(), "Escolha um motorista", Toast.LENGTH_LONG).show();
@@ -155,7 +159,6 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
         Lng = (End.longitude - Begin.longitude) / ratio;
         LatLng Movement = new LatLng(Begin.latitude+(Lat*(cont)), Begin.longitude+(Lng*(cont)));
         prvMarker = mMap.addMarker(new MarkerOptions().position(Movement).title("Motorista").icon(BitmapDescriptorFactory.fromBitmap(carBitmapIcon)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Begin));
         runnable.run();
     }
 

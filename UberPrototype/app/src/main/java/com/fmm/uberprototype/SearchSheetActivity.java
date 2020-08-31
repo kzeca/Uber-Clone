@@ -27,7 +27,7 @@ public class SearchSheetActivity extends AppCompatActivity {
 
     EditText txtBegin, txtEnd;
     Button btnConfirm;
-    ImageButton btnBack;
+    ImageButton btnBack, btnMarkerBegin, btnMarkerEnd;
     LatLng latLngBegin, latLngEnd;
 
     @Override
@@ -38,6 +38,8 @@ public class SearchSheetActivity extends AppCompatActivity {
         txtEnd = findViewById(R.id.search_sheet_et_end);
         btnConfirm = findViewById(R.id.search_sheet_bt_confirm);
         btnBack = findViewById(R.id.search_sheet_bt_back);
+        btnMarkerBegin = findViewById(R.id.search_sheet_bt_mark_begin);
+        btnMarkerEnd = findViewById(R.id.search_sheet_bt_mark_end);
 
         Places.initialize(getApplicationContext(), "AIzaSyD4cEW3sxpuhDvV0THxrjF7Oup18KKhOE8");
 
@@ -84,6 +86,22 @@ public class SearchSheetActivity extends AppCompatActivity {
             }
         });
 
+        btnMarkerBegin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchSheetActivity.this, DragLocationActivity.class);
+                startActivityForResult(intent, 3);
+            }
+        });
+
+        btnMarkerEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchSheetActivity.this, DragLocationActivity.class);
+                startActivityForResult(intent, 4);
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +123,13 @@ public class SearchSheetActivity extends AppCompatActivity {
             Place place = Autocomplete.getPlaceFromIntent(data);
             txtEnd.setText(place.getName());
             latLngEnd = place.getLatLng();
+        }
+        else if(requestCode == 3 && resultCode == RESULT_OK){
+            txtBegin.setText("Partida personalizada");
+            latLngBegin = data.getExtras().getParcelable("local");
+        }else if(requestCode == 4 && resultCode == RESULT_OK){
+            txtEnd.setText("Destino personalizado");
+            latLngEnd = data.getExtras().getParcelable("local");
         }
         else if(resultCode == AutocompleteActivity.RESULT_ERROR){
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Uber Prototype</string>
     <string name="title_activity_maps">Uber Prototype</string>
+    <string name="title_activity_drag_location">DragLocationActivity</string>
 </resources>
