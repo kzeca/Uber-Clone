@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -29,6 +30,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class ChooseDriverActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -137,9 +140,15 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
         begin_marker.position(Begin);
         begin_marker.title("Partida");
         begin_marker.icon(BitmapDescriptorFactory.fromBitmap(PinBitmapIcon));
-        
+
         mMap.addMarker(destination_marker);
         mMap.addMarker(begin_marker);
+
+        Polyline pLine;
+        PolylineOptions polylineOptions = new PolylineOptions().add(Begin, End);
+        pLine = mMap.addPolyline(polylineOptions);
+        pLine.setWidth(7);
+        pLine.setColor(Color.BLACK);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
