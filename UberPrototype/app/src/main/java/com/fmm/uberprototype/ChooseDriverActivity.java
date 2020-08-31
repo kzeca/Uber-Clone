@@ -172,30 +172,34 @@ public class ChooseDriverActivity extends FragmentActivity implements OnMapReady
     }
 
     void stop() {
+        // Add custom dialog here
         handler.removeCallbacks(runnable);
+        Toast.makeText(getApplicationContext(), "Você chegou ao seu destino", Toast.LENGTH_LONG);
+        Intent intent = new Intent(ChooseDriverActivity.this, DragLocationActivity.class);
+        startActivity(intent);
     }
 
     void move() {
-        if (cont <= ratio) {
-            if (prvMarker != null) {
-                prvMarker.remove();
-            }
-            LatLng Movement = new LatLng(Begin.latitude+(Lat*(cont)), Begin.longitude+(Lng*(cont)));
-            prvMarker = mMap.addMarker(new MarkerOptions().position(Movement).title("Motorista").icon(BitmapDescriptorFactory.fromBitmap(carBitmapIcon)));
-            if (cont >= ratio) {
-                prvMarker = null;
-            }
-            cont++;
-        }else{
-            stop();
+        if (prvMarker != null) {
+            prvMarker.remove();
         }
+        LatLng Movement = new LatLng(Begin.latitude + (Lat * (cont)), Begin.longitude + (Lng * (cont)));
+        prvMarker = mMap.addMarker(new MarkerOptions().position(Movement).title("Motorista").icon(BitmapDescriptorFactory.fromBitmap(carBitmapIcon)));
+        if (cont >= ratio) {
+            prvMarker = null;
+        }
+        cont++;
     }
 
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            move();
-            handler.postDelayed(runnable, frames);
+            if (cont <= ratio) {
+                move();
+                handler.postDelayed(runnable, frames);
+            }else{
+                stop();
+            }
         }
     };
 
